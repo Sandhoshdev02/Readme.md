@@ -92,7 +92,7 @@ def get_commit_diff(service_name: str, commit_sha: str) -> str:
 def search_code(service_name: str, query: str, limit: int = 50) -> list:
     """Search the repo's tracked files for a literal string or regex."""
     repo = _repo_path(service_name)
-    out = _run_git(repo, "grep", ["-n", "-e", query], ok_returncodes=(0, 1))
+    out = _run_git(repo, "grep", ["-n", "-e", query], ok_returncodes=(0, ))
     lines = out.splitlines()[:limit]
     policy.audit("search_code", service_name, {"query": query}, "ok", f"{len(lines)} matches")
     return lines
